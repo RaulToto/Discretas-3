@@ -12,12 +12,12 @@ int main()
     cout <<"imput the key  " ; cin >> key;
 
     CesarCode cesar(key);
-    cout << "the message encrypt is :" <<cesar.encrypt(message) << endl;
+    cout << "the message encrypt is  :" <<cesar.encrypt(message) << endl;
 
     cout << "imput the word for decrypt" << endl;
     cin >> message1;
 
-    cout << "the message decrypt is "  << cesar.decrypt(message1) << endl;
+    cout << "the message decrypt is  :" << cesar.decrypt(message1) << endl;
 
 
 }

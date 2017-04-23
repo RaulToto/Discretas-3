@@ -12,12 +12,10 @@ public:
     std::string encrypt(std::string);
     std::string decrypt(std::string);
     int getPos(char);
-    std::string reverseString(std::string);
 private:
     int key;
     //std::string message;
     std::string alfabeto="abcdefghijklmnopqrstuvwxyz*";
-
     std::string result{};
 };
 
