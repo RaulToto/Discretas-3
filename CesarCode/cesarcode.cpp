@@ -20,6 +20,7 @@ std::__cxx11::string CesarCode::encrypt(std::string message)
 
         avanzar=(getPos(message[i])+key)%27;
         this->result.push_back(alfabeto[avanzar]);
+
     }
     return this->result;
 }
@@ -27,20 +28,33 @@ std::__cxx11::string CesarCode::encrypt(std::string message)
 std::__cxx11::string CesarCode::decrypt(std::string message)
 {
     string result1 {};
+    string alfabeto1=alfabeto;
     //std::reverse(alfabeto.begin(),alfabeto.end());
-
+    reverse(alfabeto1.begin(),alfabeto1.end());
     int retroceder;
+
     for (int i = 0; i < message.length(); ++i) {
 
         retroceder=(getPos(this->result[i])-key)%27;
-
-        if(retroceder<0)
+        if(getPos(this->result[i])<key)
         {
-            retroceder=-1*retroceder;
+            retroceder=(((getPos(this->result[i])-key)+1)%27);
+            if(retroceder<0)
+            {
+                retroceder=-1*retroceder;
+            }
+            result1.push_back(alfabeto1[retroceder]);
         }
+        else if(getPos(this->result[i])>=key)
+        {
+            retroceder=(getPos(this->result[i])-key)%27;
+            if(retroceder<0)
+            {
+                retroceder=-1*retroceder;
+            }
+            result1.push_back(alfabeto[retroceder]);
 
-        result1.push_back(alfabeto[retroceder]);
-
+        }
     }
     return result1;
 }
@@ -54,3 +68,4 @@ int CesarCode::getPos(char list)
     }
     return num;
 }
+
