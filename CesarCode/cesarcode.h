@@ -11,12 +11,9 @@ public:
     CesarCode(int );
     std::string encrypt(std::string);
     std::string decrypt(std::string);
-    int getPos(char);
 private:
     int key;
-    //std::string message;
     std::string alfabeto="abcdefghijklmnopqrstuvwxyz*";
-    std::string result{};
 };
 
 #endif // CESARCODE_H

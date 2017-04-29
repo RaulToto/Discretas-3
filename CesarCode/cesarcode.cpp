@@ -13,60 +13,43 @@ CesarCode::CesarCode(int k)
 
 }
 
-std::__cxx11::string CesarCode::encrypt(std::string message)
+std::__cxx11::string CesarCode::encrypt(std::string message) //funcion para encriptar un mensaje
 {
-
-    int avanzar;
+    string result;
     for (int i = 0; i < message.length(); ++i) {
-
-        avanzar=(getPos(message[i])+key)%27;//avanza la posicion de la letra en el alfabeto mas la llave y le saca
-                                           //modulo
-        this->result.push_back(alfabeto[avanzar]);//agrega la palabra al string result;
-
+        std::size_t avanzar=(alfabeto.find(message[i])+key)%alfabeto.length();//avanza la posion de la palabra en el alfabeto mas key
+        result.push_back(alfabeto[avanzar]);//agrega la palabra al string result;
     }
-    return this->result;//retorna el resultado
+    return result;//retorna el resultado
 }
 
-std::__cxx11::string CesarCode::decrypt(std::string message)
+std::__cxx11::string CesarCode::decrypt(std::string message)//funcion para desincriptar un mensaje
 {
-    string result1 {};//crea otro string result1 para almacenar las nuevas letras que se decriptaran
-    string alfabeto1=alfabeto;//copia del alfabeto a alfabeto1
-    reverse(alfabeto1.begin(),alfabeto1.end());//invierte el alfabeto 1
+    string result1{};
     int retroceder;
-
     for (int i = 0; i < message.length(); ++i) {
-
-        if(getPos(this->result[i])<key)//si la posicion del la letra en la posicion i es menor que la clave
+        retroceder=(alfabeto.find(message[i])-key);//calcula retroceder buscando la posicion le la letra en el alfabeto menos la llave
+        if(retroceder<0)//cuando retroceder es negativo
         {
-            retroceder=(((getPos(this->result[i])-key)+1)%27);//resta posicion de la letra en i - la clave y
-                                                             //le suma +1 por que comiensa desde 0
-            if(retroceder<0)
-            {
-                retroceder=-1*retroceder;//convierte retroceder en positivo
+            retroceder=-1*retroceder;//convierte a positivo
+            if(retroceder==alfabeto.length())//en el caso de que retrocedar sea == al tamaño del alfabeto ejemplo 27%27=0
+            {   //encambio si retroceder=alfabeto.length()-(retroceder%alfabeto.length()); --> retroceder=27-(27%27)
+                retroceder=alfabeto.length()-retroceder;//retroceder =27 y en la posicion 27 en el lalista del alfabeto no existe
+                cout << "entra" << endl;
             }
-            result1.push_back(alfabeto1[retroceder]);//agrega la nueva letra a result1
+            else if (retroceder%alfabeto.length()==0){// en el caso de que retroceder%tamaño del alfabeto  sea igual a 0
+                retroceder=retroceder%alfabeto.length();//en este caso solo saca modulo
+            }
+            else//si no pasa ninguno de las anteriores
+                retroceder=alfabeto.length()-(retroceder%alfabeto.length());
+            result1.push_back(this->alfabeto[retroceder]);
         }
-        else if(getPos(this->result[i])>=key)//si la posicion de la letra en i es mayor o igual que la clave
-        {
-            retroceder=(getPos(this->result[i])-key)%27;
-            if(retroceder<0)
-            {
-                retroceder=-1*retroceder;
-            }
-            result1.push_back(alfabeto[retroceder]);
 
+        else if(retroceder>=0)//cuando retroceder es positivo
+        {
+            retroceder=retroceder%alfabeto.length();
+            result1.push_back(this->alfabeto[retroceder]);
         }
     }
-    return result1;//retorna la palabra desincriptada
+    return result1;//retorna el resultado
 }
-
-int CesarCode::getPos(char l)//esta funcion retorna la posicion de la letra en el alfabeto
-{
-    int num=0;
-    for (int i = 0; i < alfabeto.length(); ++i) {
-        if(l==alfabeto[i])//si la la letra l es igual a una letra alfabeto[i] retorna esa posicion i
-            num=i;
-    }
-    return num;
-}
-
