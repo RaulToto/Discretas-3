@@ -35,7 +35,6 @@ std::__cxx11::string CesarCode::decrypt(std::string message)//funcion para desin
             if(retroceder==alfabeto.length())//en el caso de que retrocedar sea == al tamaño del alfabeto ejemplo 27%27=0
             {   //encambio si retroceder=alfabeto.length()-(retroceder%alfabeto.length()); --> retroceder=27-(27%27)
                 retroceder=alfabeto.length()-retroceder;//retroceder =27 y en la posicion 27 en el lalista del alfabeto no existe
-                cout << "entra" << endl;
             }
             else if (retroceder%alfabeto.length()==0){// en el caso de que retroceder%tamaño del alfabeto  sea igual a 0
                 retroceder=retroceder%alfabeto.length();//en este caso solo saca modulo
