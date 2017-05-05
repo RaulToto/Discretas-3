@@ -9,10 +9,10 @@
  //////////////////////////////////////////////////////*/    
 
 #include <iostream>
-#include <NTL/ZZ.h>
-using namespace std;
-using namespace NTL;
-void euclides(ZZ &a, ZZ &b)
+#include <NTL/ZZ.h>//includ  the lib ntl 
+using namespace std;//using std namespace 
+using namespace NTL;//using NTL namespaces
+void euclides(ZZ &a, ZZ &b)//
 {
     ZZ q,r;
     q=a/b;
@@ -21,7 +21,7 @@ void euclides(ZZ &a, ZZ &b)
     {
         q=a/b;
         r=a%b;
-        cout << a  << " = " << q << "(" << b << ")" << "+" << r << endl;
+        cout << a  << " = " << q << "(" << b << ")" << "+" << r << endl;//print the euclides algorithm
         a=b;
         b=r;
     }
@@ -29,7 +29,7 @@ void euclides(ZZ &a, ZZ &b)
 int main()
 {
     ZZ a,b;
-    cout << "input a:" ; cin >> a;
+    cout << "input a:" ; cin >> a; //imput the numbers 
     cout << "input b:" ; cin >> b;
     euclides(a,b);
 }
