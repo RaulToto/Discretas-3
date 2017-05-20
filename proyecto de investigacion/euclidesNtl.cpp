@@ -10,8 +10,11 @@
 
 #include <iostream>
 #include <NTL/ZZ.h>//includ  the lib ntl 
+#include <ctime>
 using namespace std;//using std namespace 
 using namespace NTL;//using NTL namespaces
+unsigned t0,t1;
+ 
 ZZ module(ZZ &x,ZZ &y){
     ZZ q=x/y,r;
     if(q<0)
@@ -29,6 +32,7 @@ ZZ module(ZZ &x,ZZ &y){
 }
 void euclides(ZZ &a, ZZ &b)//
 {
+    t0=clock();
     ZZ q,r;
     q=a/b;
     r=module(a,b);
@@ -40,6 +44,7 @@ void euclides(ZZ &a, ZZ &b)//
         a=b;
         b=r;
     }
+    t1=clock();
 }
 int main()
 {
@@ -47,5 +52,9 @@ int main()
     cout << "input a:" ; cin >> a; //imput the numbers 
     cout << "input b:" ; cin >> b;
     euclides(a,b);
+    double time=(double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution time:" << time << endl;
+
 }
 
+ 
