@@ -1,30 +1,44 @@
 #include <iostream>
 #include <cmath>
 #include <ctime>
+#include <NTL/ZZ.h>
 using namespace std;
+using namespace NTL;
 unsigned t0,t1;
-int menor(int x,int y)
+ZZ menor(ZZ x,ZZ y)
 {
     if(y<x)
         return y;
     else 
         return x;
 }
-int lsbgcd(int u, int v)
+ZZ potencia(ZZ a,ZZ b)
+{
+    ZZ result;
+    result=1;
+    for (int i = 0; i < b; i++)
+    {
+         result=a*result;
+    }
+    return result;
+}
+
+ZZ lsbgcd(ZZ u, ZZ v)
 {
     t0=clock();
-    int a,b,t,aux,s;
+    ZZ a,b,t,aux,s,two;
+    two=2;
     a=abs(u);
     b=abs(v);
     while(b!=0)
     {
         s=0;
-        while(b*pow(2,s)<=a)
+        while(b*potencia(two,s)<=a)
         {
             s=s+1;
         }
         s=s-1;
-        t=menor(a-b*pow(2,s),b*pow(2,s+1)-a);
+        t=menor(a-b*potencia(two,s),b*potencia(two,s+1)-a);
         a=b;
         b=t;
         if(a<b)
@@ -39,8 +53,10 @@ int lsbgcd(int u, int v)
 }
 int main()
 {
-    cout << lsbgcd(89,44) << endl;
-
+    ZZ a,b;
+    cout << "input a:" ; cin >> a; //imput the numbers 
+    cout << "input b:" ; cin >> b;
+    lsbgcd(a,b);
     double time=(double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Execution time:" << time << endl;
 }
