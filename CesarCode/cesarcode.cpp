@@ -13,7 +13,7 @@ CesarCode::CesarCode(int k)
 
 }
 
-std::__cxx11::string CesarCode::encrypt(std::string message) //funcion para encriptar un mensaje
+string CesarCode::encrypt(std::string message) //funcion para encriptar un mensaje
 {
     string result;
     for (int i = 0; i < message.length(); ++i) {
@@ -23,7 +23,7 @@ std::__cxx11::string CesarCode::encrypt(std::string message) //funcion para encr
     return result;//retorna el resultado
 }
 
-std::__cxx11::string CesarCode::decrypt(std::string message)//funcion para desincriptar un mensaje
+string CesarCode::decrypt(std::string message)//funcion para desincriptar un mensaje
 {
     string result1{};
     int retroceder;
@@ -49,6 +49,10 @@ std::__cxx11::string CesarCode::decrypt(std::string message)//funcion para desin
             retroceder=retroceder%alfabeto.length();
             result1.push_back(this->alfabeto[retroceder]);
         }
+        //retroceder=retroceder%alfabeto.length();
+
+        //result1.push_back(this->alfabeto[retroceder]);
+
     }
     return result1;//retorna el resultado
 }
